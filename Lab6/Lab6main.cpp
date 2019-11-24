@@ -18,7 +18,7 @@
 using namespace std;
 
 int main(void){
-	srand(time(NULL));
+	srand(5);
 	makeSeuss c1h1=makeSeuss("DrSeuss.txt","c1h1",true,true);
 
 	return 0;

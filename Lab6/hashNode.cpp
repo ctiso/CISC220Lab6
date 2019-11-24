@@ -52,13 +52,19 @@ void hashNode::addValue(string v){
 }
 
 string hashNode::getRandValue(){
+	cout<<"made rand"<<endl;
 	string x;
+	cout<<"initialized"<<endl;
+	cout<<valuesSize<<endl;
 	if(currSize==0){
+		cout<<"cunt"<<endl;
 		x="";
 	}
 	else{
+		cout<<"made idx"<<endl;
 		int idx=rand()%currSize;
 		x=values[idx];
 	}
+	cout<<"skipped"<<endl;
 	return x;
 }

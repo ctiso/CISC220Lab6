@@ -12,12 +12,13 @@ using namespace std;
 class hashNode {
 	friend class hashMap;
 	string keyword; // this is used as the key – each key is only inserted once!
-	string *values; // the dynamically allocated array (not linked list!) of words that follow the key in the Dr. Seuss text.
+	//string *values; // the dynamically allocated array (not linked list!) of words that follow the key in the Dr. Seuss text.
 		//If this set of words gets to be larger than the valuesSize of the array, then you must re-allocate the array double in size and copy
 		//over all the old values
 	int valuesSize; // the size of the values array
 	int currSize; // the number of words in the values array so far
 public:
+	string *values;
 	hashNode(); //constructor-initializes keyword to “” , valuesSize to 0, and currSize to 0 and values to NULL
 	hashNode(string s); // initializes keyword to s, the valuesSize to 100 (or whatever you like for starting), the currSize to
 //0, and the values to be a dynamically allocated array of valuesSize

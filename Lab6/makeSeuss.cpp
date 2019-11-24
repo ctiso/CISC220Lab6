@@ -40,6 +40,10 @@ void makeSeuss::readFile() {
 void makeSeuss::writeFile() {
 	ofstream outfile(newfile.c_str(),ios::out);
 	outfile << ht->first << " ";
+	if(ht->map[2022]!=NULL){
+		cout<<"fuck"<<endl;
+		cout<<ht->map[2022]->values[0]<<endl;
+	}
 	string key = "";
 	string value = ht->map[ht->getIndex(ht->first)]->getRandValue();
 	int ct = 0;
@@ -52,6 +56,7 @@ void makeSeuss::writeFile() {
 			len = 0;
 		}
 		else len++;
+		cout<<key<<endl;
 		value = ht->map[ht->getIndex(key)]->getRandValue();
 		ct ++;
 	}
