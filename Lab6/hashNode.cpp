@@ -31,7 +31,7 @@ hashNode::hashNode(string s, string v){
 }
 
 void hashNode::dblArray(){
-	string x[valuesSize]=values;
+	string *x=values;
 	delete values;
 	values=new string[2*valuesSize];
 	for(int i=0;i<valuesSize;i++){
