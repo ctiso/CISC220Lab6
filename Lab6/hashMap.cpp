@@ -57,4 +57,26 @@ void hashMap::getClosestPrime(){
 	mapSize=x;
 }
 
+//Handles collisions using quadratic probing. i should be incremented before passing in
+int hashMap::collHash1(int h, int i){
+	return (h+i*i)%mapSize;
+}
 
+int hashMap::findKey(string k){
+	int x=calcHash(k);
+	int y=x;
+	if(map[x]->keyword==k){
+		return x;
+	}
+	else{
+		int i=1;
+		while(map[x]->keyword!=k||i<collisionct2+1){
+			x=collHash1(y,i);
+			i++;
+		}
+		if(map[x]->keyword!=k){
+			x=-1;
+		}
+	}
+	return x;
+}
