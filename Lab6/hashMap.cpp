@@ -15,12 +15,12 @@ hashMap::hashMap(bool hash1,bool coll1){
 	h1=hash1;
 	c1=coll1;
 	numKeys=0;
-	mapSize=547;
+	mapSize=251;
 	collisionct1=0;
 	collisionct2=0;
 	first="";
-	map=new hashNode *[547];
-	for(int i=0;i<547;i++){
+	map=new hashNode *[mapSize];
+	for(int i=0;i<mapSize;i++){
 		map[i]=NULL;
 	}
 }
@@ -83,7 +83,6 @@ int hashMap::findKey(string k){
 }
 
 void hashMap::reHash(){
-	cout<<numKeys<<endl;
 	hashNode *x[numKeys];
 	int j=0;
 	int keyIdx;
@@ -95,15 +94,13 @@ void hashMap::reHash(){
 		}
 	}
 	getClosestPrime();
-	delete map;
+	delete []map;
 	map=new hashNode *[mapSize];
-	int count=0;
 	for(int i=0;i<mapSize;i++){
 		map[i]=NULL;
 	}
 	for(int y=0;y<numKeys;y++){
 		keyIdx=calcHash(x[y]->keyword);
-		cout<<count<<endl;
 		if(map[keyIdx]==NULL){
 			map[keyIdx]=x[y];
 		}
@@ -119,7 +116,6 @@ void hashMap::reHash(){
 			map[keyIdx]=x[y];
 			coll=1;
 		}
-		count++;
 	}
 }
 
@@ -153,9 +149,9 @@ void hashMap::addKeyValue(string k, string v){
 	int x=getIndex(k);
 	if(map[x]==NULL){
 		map[x]=new hashNode(k,v);
+		numKeys++;
 	}
 	else{
 		map[x]->addValue(v);
 	}
-	numKeys++;
 }

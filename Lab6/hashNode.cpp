@@ -17,22 +17,25 @@ hashNode::hashNode(){
 
 hashNode::hashNode(string s){
 	keyword=s;
-	valuesSize=100;
+	valuesSize=10;
 	currSize=0;
 	values=new string[valuesSize];
 }
 
 hashNode::hashNode(string s, string v){
 	keyword=s;
-	valuesSize=100;
+	valuesSize=10;
 	currSize=1;
 	values=new string[valuesSize];
 	values[0]=v;
 }
 
 void hashNode::dblArray(){
-	string *x=values;
-	delete values;
+	string x[valuesSize];
+	for(int i=0;i<valuesSize;i++){
+		x[i]=values[i];
+	}
+	delete []values;
 	values=new string[2*valuesSize];
 	for(int i=0;i<valuesSize;i++){
 		values[i]=x[i];
