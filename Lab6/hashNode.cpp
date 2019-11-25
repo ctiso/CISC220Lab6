@@ -57,7 +57,6 @@ string hashNode::getRandValue(){
 	cout<<"initialized"<<endl;
 	cout<<valuesSize<<endl;
 	if(currSize==0){
-		cout<<"cunt"<<endl;
 		x="";
 	}
 	else{

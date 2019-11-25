@@ -51,7 +51,7 @@ int hashMap::calcHash2(string k){
 			cCount++;
 		}
 	}
-	len=len*cCount*vCount;
+	len=len*cCount/vCount;
 	len=len-cCount+vCount;
 	return len%mapSize;
 }
@@ -88,7 +88,13 @@ int hashMap::collHash2(int h){
 	return h;
 }
 int hashMap::findKey(string k){
-	int x=calcHash(k);
+	int x;
+	if(h1==true){
+		x=calcHash(k);
+	}
+	if(h1==false){
+		x=calcHash2(k);
+	}
 	int y=x;
 	if(map[x]->keyword==k){
 		return x;
@@ -96,7 +102,12 @@ int hashMap::findKey(string k){
 	else{
 		int i=1;
 		while(map[x]->keyword!=k||i<collisionct2+1){
-			x=collHash1(y,i);
+			if(c1==true){
+				x=collHash1(y,i);
+			}
+			if(c1==false){
+				x=collHash2(y);
+			}
 			i++;
 		}
 		if(map[x]->keyword!=k){
@@ -124,17 +135,32 @@ void hashMap::reHash(){
 		map[i]=NULL;
 	}
 	for(int y=0;y<numKeys;y++){
-		keyIdx=calcHash(x[y]->keyword);
+		if(h1==true){
+			keyIdx=calcHash(x[y]->keyword);
+		}
+		if(h1==false){
+			keyIdx=calcHash2(x[y]->keyword);
+		}
 		if(map[keyIdx]==NULL){
 			map[keyIdx]=x[y];
 		}
 		else{
 			collisionct1++;
-			keyIdx=collHash1(keyIdx,coll);
+			if(c1==true){
+				keyIdx=collHash1(keyIdx,coll);
+			}
+			if(c1==false){
+				keyIdx=collHash2(keyIdx);
+			}
 			coll++;
 			while(map[keyIdx]!=NULL){
 				collisionct2++;
-				keyIdx=collHash1(keyIdx,coll);
+				if(c1==true){
+					keyIdx=collHash1(keyIdx,coll);
+				}
+				if(c1==false){
+					keyIdx=collHash2(keyIdx);
+				}
 				coll++;
 			}
 			map[keyIdx]=x[y];
@@ -148,7 +174,13 @@ int hashMap::getIndex(string k){
 		cout<<"gotta rehash"<<endl;
 		reHash();
 	}
-	int x=calcHash(k);
+	int x;
+	if(h1==true){
+		x=calcHash(k);
+	}
+	if(h1==false){
+		x=calcHash2(k);
+	}
 	int coll=1;
 	int y=x;
 	bool loop=map[x]!=NULL;
@@ -160,9 +192,18 @@ int hashMap::getIndex(string k){
 			loop=false;
 		}
 		else{
-			if(coll==1){collisionct1++;}
-			else{collisionct2++;}
+			if(coll==1){
+				collisionct1++;
+			}
+			else{
+				collisionct2++;
+			}
+			if(c1 ==true){
 			x=collHash1(y,coll);
+			}
+			if(c1==false){
+				x=collHash2(y);
+			}
 			coll++;
 		}
 	}
