@@ -38,6 +38,24 @@ int hashMap::calcHash(string k){
 	return (k[0]*x)%mapSize;
 }
 
+//Squares the string length, then multiplies by the counts of vowels and consonants. Then subtracts the amount of consoanants and then adds the number of vowels
+int hashMap::calcHash2(string k){
+	int len=k.size()*k.size();
+	int vCount=0;
+	int cCount=0;
+	for(int i=0;i<k.size();i++){
+		if(k[i]=='A'||k[i]=='a'||k[i]=='e'||k[i]=='E'||k[i]=='i'||k[i]=='I'||k[i]=='o'||k[i]=='u'||k[i]=='O'||k[i]=='u'||k[i]=='y'||k[i]=='Y'){
+			vCount++;
+		}
+		else{
+			cCount++;
+		}
+	}
+	len=len*cCount*vCount;
+	len=len-cCount+vCount;
+	return len%mapSize;
+}
+
 void hashMap::getClosestPrime(){
 	int x=2*mapSize;
 	bool y=false;
@@ -62,7 +80,13 @@ void hashMap::getClosestPrime(){
 int hashMap::collHash1(int h, int i){
 	return ((h+i*i*i)%mapSize);
 }
-
+//Linear probing
+int hashMap::collHash2(int h){
+	while(map[h]!=NULL){
+		h++;
+	}
+	return h;
+}
 int hashMap::findKey(string k){
 	int x=calcHash(k);
 	int y=x;
