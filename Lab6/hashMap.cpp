@@ -41,9 +41,10 @@ int hashMap::calcHash(string k){
 //Squares the string length, then multiplies by the counts of vowels and consonants. Then subtracts the amount of consoanants and then adds the number of vowels
 int hashMap::calcHash2(string k){
 	int len=k.size()*k.size();
+	int x=k.size();
 	int vCount=0;
 	int cCount=0;
-	for(int i=0;i<k.size();i++){
+	for(int i=0;i<x;i++){
 		if(k[i]=='A'||k[i]=='a'||k[i]=='e'||k[i]=='E'||k[i]=='i'||k[i]=='I'||k[i]=='o'||k[i]=='u'||k[i]=='O'||k[i]=='u'||k[i]=='y'||k[i]=='Y'){
 			vCount++;
 		}
@@ -92,7 +93,7 @@ int hashMap::findKey(string k){
 	if(h1==true){
 		x=calcHash(k);
 	}
-	if(h1==false){
+	else if(h1==false){
 		x=calcHash2(k);
 	}
 	int y=x;
@@ -105,7 +106,7 @@ int hashMap::findKey(string k){
 			if(c1==true){
 				x=collHash1(y,i);
 			}
-			if(c1==false){
+			else if(c1==false){
 				x=collHash2(y);
 			}
 			i++;
@@ -138,10 +139,10 @@ void hashMap::reHash(){
 		if(h1==true){
 			keyIdx=calcHash(x[y]->keyword);
 		}
-		if(h1==false){
+		else if(h1==false){
 			keyIdx=calcHash2(x[y]->keyword);
 		}
-		if(map[keyIdx]==NULL){
+		else if(map[keyIdx]==NULL){
 			map[keyIdx]=x[y];
 		}
 		else{
@@ -149,7 +150,7 @@ void hashMap::reHash(){
 			if(c1==true){
 				keyIdx=collHash1(keyIdx,coll);
 			}
-			if(c1==false){
+			else if(c1==false){
 				keyIdx=collHash2(keyIdx);
 			}
 			coll++;
@@ -158,7 +159,7 @@ void hashMap::reHash(){
 				if(c1==true){
 					keyIdx=collHash1(keyIdx,coll);
 				}
-				if(c1==false){
+				else if(c1==false){
 					keyIdx=collHash2(keyIdx);
 				}
 				coll++;
@@ -171,14 +172,13 @@ void hashMap::reHash(){
 
 int hashMap::getIndex(string k){
 	if(((double)numKeys)/((double)mapSize)>.7){
-		cout<<"gotta rehash"<<endl;
 		reHash();
 	}
 	int x;
 	if(h1==true){
 		x=calcHash(k);
 	}
-	if(h1==false){
+	else if(h1==false){
 		x=calcHash2(k);
 	}
 	int coll=1;
@@ -201,7 +201,7 @@ int hashMap::getIndex(string k){
 			if(c1 ==true){
 			x=collHash1(y,coll);
 			}
-			if(c1==false){
+			else if(c1==false){
 				x=collHash2(y);
 			}
 			coll++;

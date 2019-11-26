@@ -17,12 +17,12 @@
 
 using namespace std;
 
-int main(void){
+int main(){
 	srand(5);
 	makeSeuss c1h1=makeSeuss("DrSeuss.txt","c1h1",true,true);
-	makeSeuss c2h1=makeSeuss("DrSeuss.txt","c2h1",true,false);
-	makeSeuss c1h2=makeSeuss("DrSeuss.txt","c1h2",false,true);
-	makeSeuss c2h2=makeSeuss("DrSeuss.txt","c2h2",false,false);
+	makeSeuss c2h2=makeSeuss("DrSeuss.txt","c2h2",true,true);
+	makeSeuss c2h1=makeSeuss("DrSeuss.txt","c1h1",true,true);
+	makeSeuss c1h2=makeSeuss("DrSeuss.txt","c1h1",true,true);
 	return 0;
 }
 
